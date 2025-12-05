@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바이브 코딩 핵심 웹디자인 용어 사전</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #16a085;
+            --accent: #e74c3c;
+            --bg: #f4f7f6;
+            --text: #2c3e50;
+            --card-bg: #ffffff;
+            --header-bg: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--header-bg);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 50px;
+        }
+        
+        .category-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .term-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .term-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 20px;
+            background: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .term-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        
+        .term-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--header-bg);
+            background: #eef2f7;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+        
+        .term-desc {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .visual-demo {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            height: 100px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .demo-label {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 10px;
+            color: #adb5bd;
+            text-transform: uppercase;
+        }
+        
+        .prompt-box {
+            background: #f1f3f5;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid var(--secondary);
+            font-size: 0.9rem;
+            color: #444;
+            margin-top: auto;
+        }
+        
+        .prompt-label {
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: var(--secondary);
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        /* 시각적 데모 스타일 */
+        .mini-layout { width: 80px; height: 60px; border: 1px solid #ccc; display: flex; flex-direction: column; background: #fff; }
+        .mini-header { height: 15px; background: #3498db; width: 100%; }
+        .mini-content { flex: 1; background: #fff; }
+        .mini-footer { height: 15px; background: #95a5a6; width: 100%; }
+        .mini-hero { height: 30px; background: #e74c3c; width: 100%; }
+        .mini-sidebar { width: 20px; background: #f1c40f; height: 100%; }
+        
+        .box-model-demo { width: 60px; height: 40px; background: #3498db; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        .padding-box { background: rgba(46, 204, 113, 0.3); border: 1px dashed #2ecc71; padding: 10px; }
+        .margin-box { background: rgba(230, 126, 34, 0.3); border: 1px dashed #e67e22; padding: 10px; }
+        
+        .grid-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; width: 80%; }
+        .grid-item { background: #3498db; color: white; padding: 5px; text-align: center; font-size: 12px; border-radius: 4px; }
+        
+        .flex-demo { display: flex; gap: 5px; justify-content: center; width: 100%; }
+        .flex-item { background: #9b59b6; color: white; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 12px; }
+
+        /* 카테고리별 아이콘 색상 */
+        .cat-1 { color: #e67e22; } 
+        .cat-2 { color: #9b59b6; } 
+        .cat-3 { color: #3498db; } 
+        .cat-4 { color: #e74c3c; } 
+        .cat-5 { color: #2ecc71; } 
+        .cat-6 { color: #f1c40f; } 
+        .cat-7 { color: #34495e; } 
+
+        @media (max-width: 768px) {
+            .term-grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📚 바이브 코딩 용어 사전 (확장판)</h1>
+        <p class="subtitle">AI(Cursor)와 소통하기 위한 핵심 웹디자인 용어 가이드 (총 50+ 용어)</p>
+
+        <!-- 1. 레이아웃 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span class="cat-1">🏗️</span> 레이아웃 용어 (Layout)</h2>
+            <div class="term-grid">
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Header</span></div>
+                    <div class="term-desc">상단 영역 (로고, 메뉴)</div>
+                    <div class="visual-demo">
+                        <div class="mini-layout">
+                            <div class="mini-header" style="background: #e74c3c;"></div>
+                            <div class="mini-content"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "헤더에 로고랑 메뉴 넣어줘"
+                    </div>
+                </div>
+                
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Footer</span></div>
+                    <div class="term-desc">하단 영역 (연락처, 저작권)</div>
+                    <div class="visual-demo">
+                        <div class="mini-layout">
+                            <div class="mini-content"></div>
+                            <div class="mini-footer" style="background: #e74c3c;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "푸터에 주소랑 전화번호"
+                    </div>
+                </div>
+                
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Hero</span></div>
+                    <div class="term-desc">첫 화면 큰 배너 영역</div>
+                    <div class="visual-demo">
+                        <div class="mini-layout">
+                            <div class="mini-header"></div>
+                            <div class="mini-hero" style="background: #e74c3c;"></div>
+                            <div class="mini-content"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "히어로 섹션에 슬로건 넣어줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Sidebar</span></div>
+                    <div class="term-desc">옆에 붙은 보조 영역</div>
+                    <div class="visual-demo">
+                        <div class="mini-layout" style="flex-direction: row;">
+                            <div class="mini-content"></div>
+                            <div class="mini-sidebar" style="background: #e74c3c;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "오른쪽에 사이드바 추가"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Grid</span></div>
+                    <div class="term-desc">격자 형태 배치</div>
+                    <div class="visual-demo">
+                        <div class="grid-demo">
+                            <div class="grid-item">1</div>
+                            <div class="grid-item">2</div>
+                            <div class="grid-item">3</div>
+                            <div class="grid-item">4</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "2열 그리드로 카드 배치해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Flexbox</span></div>
+                    <div class="term-desc">유연한 1차원 정렬</div>
+                    <div class="visual-demo">
+                        <div class="flex-demo">
+                            <div class="flex-item">1</div>
+                            <div class="flex-item">2</div>
+                            <div class="flex-item">3</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "플렉스로 가로 정렬해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Wrapper</span></div>
+                    <div class="term-desc">요소들을 감싸는 가장 바깥쪽 컨테이너</div>
+                    <div class="visual-demo">
+                        <div style="border: 2px dashed #e74c3c; padding: 5px;">
+                            <div style="background: #ecf0f1; padding: 5px; font-size: 10px;">Inner Content</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "전체를 감싸는 래퍼(Wrapper) 추가해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Gutter</span></div>
+                    <div class="term-desc">그리드 열(Column) 사이의 간격</div>
+                    <div class="visual-demo">
+                        <div style="display: flex; gap: 10px; width: 80%;">
+                            <div style="flex: 1; background: #3498db; height: 30px;"></div>
+                            <div style="width: 10px; background: rgba(231, 76, 60, 0.3);"></div>
+                            <div style="flex: 1; background: #3498db; height: 30px;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "열 사이 거터(Gutter)를 20px로 줘"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 스타일 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span class="cat-2">🎨</span> 스타일 용어 (Style)</h2>
+            <div class="term-grid">
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Padding</span></div>
+                    <div class="term-desc">안쪽 여백 (내용과 테두리 사이)</div>
+                    <div class="visual-demo">
+                        <div class="padding-box">
+                            <div class="box-model-demo">Content</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "패딩 좀 늘려줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Margin</span></div>
+                    <div class="term-desc">바깥 여백 (요소와 요소 사이)</div>
+                    <div class="visual-demo">
+                        <div class="margin-box">
+                            <div class="box-model-demo" style="background: #95a5a6;">Element</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "마진 없애줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Border-radius</span></div>
+                    <div class="term-desc">모서리 둥글기</div>
+                    <div class="visual-demo">
+                        <div style="width: 60px; height: 60px; background: #3498db; border-radius: 50%;"></div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "모서리 둥글게 50%로"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Box-shadow</span></div>
+                    <div class="term-desc">그림자 효과</div>
+                    <div class="visual-demo">
+                        <div style="width: 60px; height: 40px; background: white; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border-radius: 4px;"></div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "그림자 효과 넣어줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Opacity</span></div>
+                    <div class="term-desc">투명도 (0.0 ~ 1.0)</div>
+                    <div class="visual-demo">
+                        <div style="display: flex; gap: 10px;">
+                            <div style="width: 30px; height: 30px; background: #e74c3c; opacity: 1.0;">1.0</div>
+                            <div style="width: 30px; height: 30px; background: #e74c3c; opacity: 0.5;">0.5</div>
+                            <div style="width: 30px; height: 30px; background: #e74c3c; opacity: 0.2;">0.2</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "투명도 50%로 해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Gradient</span></div>
+                    <div class="term-desc">그라데이션 색상</div>
+                    <div class="visual-demo">
+                        <div style="width: 80%; height: 40px; background: linear-gradient(45deg, #3498db, #e74c3c); border-radius: 4px;"></div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "파란색에서 빨간색 그라데이션"
+                    </div>
+                </div>
+                
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Z-index</span></div>
+                    <div class="term-desc">요소의 겹침 순서 (레이어)</div>
+                    <div class="visual-demo">
+                        <div style="position: relative; width: 60px; height: 60px;">
+                            <div style="position: absolute; top: 0; left: 0; width: 40px; height: 40px; background: #e74c3c; z-index: 1;">1</div>
+                            <div style="position: absolute; bottom: 0; right: 0; width: 40px; height: 40px; background: #3498db; z-index: 2;">2</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "이 버튼이 이미지 위로 오게(z-index) 해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Backdrop-filter</span></div>
+                    <div class="term-desc">배경 흐림 효과 (유리창 느낌)</div>
+                    <div class="visual-demo" style="background-image: radial-gradient(#3498db 20%, transparent 20%), radial-gradient(#e74c3c 20%, transparent 20%); background-size: 20px 20px; background-position: 0 0, 10px 10px;">
+                        <div style="width: 80%; height: 40px; background: rgba(255,255,255,0.3); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; font-size: 10px;">Glass</div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "배경을 흐리게 해서 글래스모피즘 효과 줘"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 타이포그래피 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span class="cat-3">🔤</span> 타이포그래피 용어 (Typography)</h2>
+            <div class="term-grid">
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Font-weight</span></div>
+                    <div class="term-desc">글자 굵기</div>
+                    <div class="visual-demo">
+                        <div style="font-size: 20px;">
+                            <span style="font-weight: 100;">Thin</span> / 
+                            <span style="font-weight: 900;">Bold</span>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "폰트 볼드체로 바꿔줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Line-height</span></div>
+                    <div class="term-desc">줄 간격 (행간)</div>
+                    <div class="visual-demo">
+                        <div style="font-size: 12px; width: 80%; border: 1px solid #eee; padding: 5px;">
+                            <div style="line-height: 1.0; margin-bottom: 10px;">좁은 간격<br>좁은 간격</div>
+                            <div style="line-height: 2.0;">넓은 간격<br>넓은 간격</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "줄간격 1.6으로 넓혀줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Letter-spacing</span></div>
+                    <div class="term-desc">글자 간격 (자간)</div>
+                    <div class="visual-demo">
+                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                            <div style="letter-spacing: -1px; font-size: 12px;">좁은 자간 (-1px)</div>
+                            <div style="letter-spacing: 2px; font-size: 12px;">넓은 자간 (2px)</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "자간을 좀 넓혀서 시원하게 해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Text-align</span></div>
+                    <div class="term-desc">텍스트 정렬</div>
+                    <div class="visual-demo" style="flex-direction: column; gap: 5px;">
+                        <div style="width: 80%; border-bottom: 1px solid #ddd; text-align: left; font-size: 12px;">Left</div>
+                        <div style="width: 80%; border-bottom: 1px solid #ddd; text-align: center; font-size: 12px;">Center</div>
+                        <div style="width: 80%; border-bottom: 1px solid #ddd; text-align: right; font-size: 12px;">Right</div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "텍스트 가운데 정렬해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Text-decoration</span></div>
+                    <div class="term-desc">텍스트 장식 (밑줄, 취소선)</div>
+                    <div class="visual-demo">
+                        <div style="display: flex; flex-direction: column; gap: 5px; font-size: 12px;">
+                            <div style="text-decoration: underline;">밑줄 (Underline)</div>
+                            <div style="text-decoration: line-through;">취소선 (Line-through)</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "링크 밑줄 없애줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Word-break</span></div>
+                    <div class="term-desc">단어 줄바꿈 처리</div>
+                    <div class="visual-demo">
+                        <div style="width: 80px; border: 1px solid #ddd; font-size: 10px; word-break: keep-all;">안녕하세요반갑습니다</div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "단어가 중간에 끊기지 않게(keep-all) 해줘"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 인터랙션 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span class="cat-4">🖱️</span> 인터랙션 용어 (Interaction)</h2>
+            <div class="term-grid">
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Hover</span></div>
+                    <div class="term-desc">마우스 올렸을 때</div>
+                    <div class="visual-demo">
+                        <button style="padding: 5px 15px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#2980b9'" onmouseout="this.style.background='#3498db'">Hover Me!</button>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "호버하면 색상 어둡게 변경"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Active</span></div>
+                    <div class="term-desc">클릭하고 있는 상태</div>
+                    <div class="visual-demo">
+                        <button style="padding: 5px 15px; background: #3498db; color: white; border: none; border-radius: 4px;" onmousedown="this.style.transform='scale(0.9)'" onmouseup="this.style.transform='scale(1)'">Click Me!</button>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "클릭했을 때(Active) 눌리는 느낌 줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Transform</span></div>
+                    <div class="term-desc">변형 (크기, 회전, 이동)</div>
+                    <div class="visual-demo">
+                         <div style="width: 40px; height: 40px; background: #9b59b6; transform: rotate(45deg); color: white; display: flex; align-items: center; justify-content: center; font-size: 10px;">Turn</div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "45도 회전시켜줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Transition</span></div>
+                    <div class="term-desc">부드러운 변화 효과</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 10px; background: #eee; border-radius: 5px;">
+                            <div style="width: 50%; height: 100%; background: #2ecc71; border-radius: 5px;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "색상 변화를 0.3초 동안 부드럽게(Transition) 해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Keyframes</span></div>
+                    <div class="term-desc">복잡한 애니메이션 정의</div>
+                    <div class="visual-demo">
+                        <div style="width: 20px; height: 20px; background: #e74c3c; border-radius: 50%; animation: pulse 1s infinite;"></div>
+                        <style>@keyframes pulse { 0% { transform: scale(0.8); } 50% { transform: scale(1.2); } 100% { transform: scale(0.8); } }</style>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "깜빡이는 키프레임 애니메이션 추가해줘"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 반응형 & 컴포넌트 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span class="cat-6">📱</span> 반응형 & 컴포넌트</h2>
+            <div class="term-grid">
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Responsive</span></div>
+                    <div class="term-desc">화면 크기 적응</div>
+                    <div class="visual-demo">
+                        <div style="display: flex; align-items: end; gap: 10px;">
+                            <div style="width: 15px; height: 25px; border: 2px solid #333; border-radius: 2px;"></div>
+                            <div style="width: 25px; height: 35px; border: 2px solid #333; border-radius: 3px;"></div>
+                            <div style="width: 40px; height: 30px; border: 2px solid #333; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "모바일/태블릿/PC 반응형으로"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Navbar</span></div>
+                    <div class="term-desc">상단 네비게이션 바</div>
+                    <div class="visual-demo">
+                        <div style="width: 90%; height: 30px; background: #fff; border: 1px solid #ddd; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <div style="width: 20px; height: 10px; background: #3498db;"></div>
+                            <div style="display: flex; gap: 5px;">
+                                <div style="width: 15px; height: 5px; background: #ccc;"></div>
+                                <div style="width: 15px; height: 5px; background: #ccc;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "네브바 상단에 고정해줘"
+                    </div>
+                </div>
+                
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Modal</span></div>
+                    <div class="term-desc">팝업 창 (대화상자)</div>
+                    <div class="visual-demo" style="position: relative; background: #ddd;">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3);"></div>
+                        <div style="width: 60%; height: 50%; background: white; z-index: 1; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px;">Modal</div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "중앙에 모달 띄워줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Carousel</span></div>
+                    <div class="term-desc">슬라이드 배너</div>
+                    <div class="visual-demo">
+                        <div style="width: 80%; height: 40px; background: #34495e; color: white; display: flex; align-items: center; justify-content: space-between; padding: 0 5px; border-radius: 4px;">
+                            <span><</span> <span>Slide</span> <span>></span>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "이미지 3개 들어가는 캐러셀 만들어줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Accordion</span></div>
+                    <div class="term-desc">접었다 펴는 메뉴 (FAQ 등)</div>
+                    <div class="visual-demo" style="flex-direction: column; justify-content: start; padding-top: 10px;">
+                        <div style="width: 90%; height: 20px; background: #eee; margin-bottom: 2px; display: flex; align-items: center; padding-left: 5px; font-size: 10px;">Question ▾</div>
+                        <div style="width: 90%; height: 30px; background: #fff; border: 1px solid #eee; font-size: 10px; padding: 5px;">Answer...</div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "FAQ를 아코디언 형태로 구현해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Badge / Tag</span></div>
+                    <div class="term-desc">상태나 카테고리 표시 라벨</div>
+                    <div class="visual-demo">
+                        <span style="background: #e74c3c; color: white; padding: 2px 8px; border-radius: 10px; font-size: 10px;">New</span>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "제목 옆에 'New' 뱃지 달아줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Breadcrumb</span></div>
+                    <div class="term-desc">현재 위치 경로 표시</div>
+                    <div class="visual-demo">
+                        <div style="font-size: 10px; color: #7f8c8d;">Home > Shop > Shoes</div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "상단에 브레드크럼(이동 경로) 추가해줘"
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 7. 정렬/배치 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span class="cat-7">🎯</span> 정렬/배치 용어 (Alignment)</h2>
+            <div class="term-grid">
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Center</span></div>
+                    <div class="term-desc">가운데 정렬</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #eee;">
+                            <div style="width: 30px; height: 30px; background: #e74c3c;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "가운데 정렬해줘"
+                    </div>
+                </div>
+                
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Space-between</span></div>
+                    <div class="term-desc">양끝 정렬, 사이 균등</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: space-between; background: #eee; padding: 0 10px; box-sizing: border-box;">
+                            <div style="width: 20px; height: 20px; background: #e74c3c;"></div>
+                            <div style="width: 20px; height: 20px; background: #e74c3c;"></div>
+                            <div style="width: 20px; height: 20px; background: #e74c3c;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "양쪽 끝 붙이고 사이 균등하게"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Sticky</span></div>
+                    <div class="term-desc">스크롤해도 상단에 달라붙음</div>
+                    <div class="visual-demo" style="overflow: hidden;">
+                        <div style="height: 100%; overflow-y: auto;">
+                            <div style="height: 20px; background: #95a5a6;"></div>
+                            <div style="height: 20px; background: #f1c40f; position: sticky; top: 0;">Sticky Header</div>
+                            <div style="height: 100px; background: #eee;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "메뉴가 스크롤해도 상단에 붙어있게(Sticky) 해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Fixed</span></div>
+                    <div class="term-desc">화면 특정 위치에 고정</div>
+                    <div class="visual-demo">
+                        <div style="position: relative; width: 100%; height: 100%; background: #eee;">
+                            <div style="position: absolute; bottom: 5px; right: 5px; width: 20px; height: 20px; background: #3498db; border-radius: 50%;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "상담 버튼을 우측 하단에 고정(Fixed)해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Absolute</span></div>
+                    <div class="term-desc">부모 기준 절대 위치 배치</div>
+                    <div class="visual-demo">
+                        <div style="position: relative; width: 60px; height: 60px; border: 1px dashed #333;">
+                            <div style="position: absolute; top: 0; right: 0; width: 20px; height: 20px; background: #e74c3c;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "아이콘을 박스 오른쪽 위에 절대 위치(Absolute)로 둬"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. 실무 개발 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span style="color: #27ae60;">💻</span> 실무 개발 용어 (Development)</h2>
+            <div class="term-grid">
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Refactoring</span></div>
+                    <div class="term-desc">기능은 유지하되 코드 구조 개선</div>
+                    <div class="visual-demo" style="flex-direction: column; align-items: start; padding: 10px; font-size: 10px; font-family: monospace;">
+                        <div style="color: #e74c3c;">// Bad: 중복 코드</div>
+                        <div style="color: #27ae60;">// Good: 함수로 분리</div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "기능은 그대로 두고 코드만 깔끔하게 리팩토링해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Hard-coding</span></div>
+                    <div class="term-desc">값을 코드에 직접 입력하는 것 (지양)</div>
+                    <div class="visual-demo" style="font-family: monospace; font-size: 10px; display: flex; flex-direction: column; justify-content: center;">
+                        <div>color: <span style="text-decoration: line-through; color: #e74c3c;">"#ff0000"</span></div>
+                        <div>color: <span style="color: #27ae60;">var(--primary)</span></div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "색상 값 하드코딩 하지 말고 CSS 변수로 빼줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Semantic</span></div>
+                    <div class="term-desc">의미에 맞는 태그 사용 (&lt;div&gt; 남발 X)</div>
+                    <div class="visual-demo" style="font-size: 10px; font-family: monospace;">
+                        &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;,<br>&lt;footer&gt;, &lt;article&gt; ...
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "div 대신 시맨틱 태그(header, main 등)를 사용해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Dummy Data</span></div>
+                    <div class="term-desc">테스트용 가짜 데이터</div>
+                    <div class="visual-demo">
+                        <div style="background: #f1f1f1; padding: 5px; border-radius: 4px; font-size: 10px;">
+                            이름: 홍길동<br>나이: 99세<br>주소: 서울시...
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "게시판에 더미 데이터 10개 정도 채워서 보여줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Comment</span></div>
+                    <div class="term-desc">코드 설명 주석</div>
+                    <div class="visual-demo" style="font-family: monospace; font-size: 10px; color: #27ae60;">
+                        /* 이 함수는 로그인을<br>처리합니다 */
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "각 기능마다 설명 주석(Comment)을 달아줘"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. 프롬프트 패턴 -->
+        <div class="category-section" style="border: 2px solid var(--primary); background-color: #f0f7ff;">
+            <h2 class="category-title"><span style="color: var(--primary);">💡</span> 바이브 코딩 프롬프트 패턴 (Prompt Pattern)</h2>
+            <p style="margin-bottom: 20px; color: #666;">AI에게 일을 더 잘 시키기 위한 마법의 문장 구조입니다.</p>
+            
+            <div class="term-grid">
+                <div class="term-card" style="border-color: var(--primary);">
+                    <div class="term-header"><span class="term-name" style="background: var(--primary); color: white;">1. 역할 부여 (Role)</span></div>
+                    <div class="term-desc">AI에게 전문가 페르소나를 입혀 결과물 품질 향상</div>
+                    <div class="prompt-box" style="background: white;">
+                        <span class="prompt-label">🗣️ 사용 예시</span>
+                        "너는 <strong>10년차 시니어 프론트엔드 개발자</strong>야. <br>모바일 최적화와 웹 접근성을 최우선으로 고려해서 코드를 짜줘."
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-color: var(--primary);">
+                    <div class="term-header"><span class="term-name" style="background: var(--primary); color: white;">2. 단계별 유도 (Chain of Thought)</span></div>
+                    <div class="term-desc">한 번에 말고 순서대로 생각하게 하여 오류 감소</div>
+                    <div class="prompt-box" style="background: white;">
+                        <span class="prompt-label">🗣️ 사용 예시</span>
+                        "다음 순서로 진행해줘:<br>
+                        1. 먼저 HTML 구조를 잡고<br>
+                        2. CSS 변수로 컬러 시스템을 정의하고<br>
+                        3. 마지막에 레이아웃 스타일을 적용해줘"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-color: var(--primary);">
+                    <div class="term-header"><span class="term-name" style="background: var(--primary); color: white;">3. 예시 제공 (Few-shot)</span></div>
+                    <div class="term-desc">원하는 스타일의 예시 코드를 줘서 방향성 고정</div>
+                    <div class="prompt-box" style="background: white;">
+                        <span class="prompt-label">🗣️ 사용 예시</span>
+                        "아래 코드 스타일처럼 작성해줘:<br>
+                        (내가 좋아하는 깔끔한 코드 예시 붙여넣기)<br>
+                        이 스타일을 유지하면서 로그인 페이지를 만들어줘."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. 필수 웹 섹션 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span style="color: #8e44ad;">🏗️</span> 필수 웹 섹션 용어 (Sections)</h2>
+            <p style="margin-bottom: 20px; color: #666;">"그거 있잖아..." 대신 정확한 섹션 이름을 부르면 AI가 찰떡같이 알아듣습니다.</p>
+
+            <div class="term-grid">
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">GNB</span></div>
+                    <div class="term-desc">Global Navigation Bar (최상단 공통 메뉴)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; background: #fff; border-bottom: 1px solid #ddd;">
+                            <div style="width: 100%; height: 20px; background: #2c3e50; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; box-sizing: border-box;">
+                                <div style="width: 20px; height: 10px; background: #3498db;"></div>
+                                <div style="display: flex; gap: 5px;">
+                                    <div style="width: 15px; height: 5px; background: #fff; opacity: 0.5;"></div>
+                                    <div style="width: 15px; height: 5px; background: #fff; opacity: 0.5;"></div>
+                                    <div style="width: 15px; height: 5px; background: #fff; opacity: 0.5;"></div>
+                                </div>
+                            </div>
+                            <div style="padding: 10px; font-size: 10px; color: #999;">Contents...</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "<strong>GNB</strong>는 스크롤해도 상단에 고정되게 해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Hero Section</span></div>
+                    <div class="term-desc">메인 페이지 최상단 대형 배너</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; flex-direction: column;">
+                            <div style="height: 15px; background: #2c3e50;"></div>
+                            <div style="flex: 1; background: #e74c3c; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; flex-direction: column;">
+                                <div>BIG TITLE</div>
+                                <div style="width: 40px; height: 10px; background: white; margin-top: 5px; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "임팩트 있는 <strong>히어로 섹션</strong>을 만들어줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Feature</span></div>
+                    <div class="term-desc">주요 기능/특징 소개 (보통 3-4열)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 5px; background: #f9f9f9;">
+                            <div style="width: 30px; height: 40px; background: white; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <div style="width: 10px; height: 10px; background: #3498db; border-radius: 50%; margin-bottom: 3px;"></div>
+                                <div style="width: 20px; height: 2px; background: #ccc;"></div>
+                            </div>
+                            <div style="width: 30px; height: 40px; background: white; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <div style="width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; margin-bottom: 3px;"></div>
+                                <div style="width: 20px; height: 2px; background: #ccc;"></div>
+                            </div>
+                            <div style="width: 30px; height: 40px; background: white; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <div style="width: 10px; height: 10px; background: #f1c40f; border-radius: 50%; margin-bottom: 3px;"></div>
+                                <div style="width: 20px; height: 2px; background: #ccc;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "서비스 장점 3가지를 보여주는 <strong>Feature 섹션</strong> 추가해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Testimonial</span></div>
+                    <div class="term-desc">고객 후기/추천사 모음</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; background: #f4f4f4; display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 80%; height: 40px; background: white; border-radius: 4px; padding: 5px; display: flex; gap: 5px; align-items: center;">
+                                <div style="width: 20px; height: 20px; background: #ccc; border-radius: 50%;"></div>
+                                <div style="flex: 1;">
+                                    <div style="width: 100%; height: 3px; background: #eee; margin-bottom: 3px;"></div>
+                                    <div style="width: 60%; height: 3px; background: #eee;"></div>
+                                    <div style="font-size: 8px; color: #f1c40f; margin-top: 3px;">★★★★★</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "신뢰감을 주는 <strong>Testimonial 섹션</strong>을 슬라이드로 만들어줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">CTA</span></div>
+                    <div class="term-desc">Call To Action (행동 유도 배너)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; background: #2c3e50; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                            <div style="font-size: 10px; margin-bottom: 5px;">지금 바로 시작하세요!</div>
+                            <div style="padding: 3px 10px; background: #e74c3c; border-radius: 10px; font-size: 8px;">무료 체험하기</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "하단에 앱 다운로드를 유도하는 <strong>CTA 섹션</strong> 넣어줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Pricing</span></div>
+                    <div class="term-desc">가격 정책/요금제 표</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 5px; background: #fff;">
+                            <div style="width: 30px; height: 50px; border: 1px solid #ddd; border-radius: 3px; display: flex; flex-direction: column; align-items: center; padding-top: 5px;">
+                                <div style="font-size: 6px;">BASIC</div>
+                                <div style="font-size: 8px; font-weight: bold;">$0</div>
+                            </div>
+                            <div style="width: 30px; height: 60px; border: 1px solid #3498db; background: #ebf5fb; border-radius: 3px; display: flex; flex-direction: column; align-items: center; padding-top: 5px; position: relative; top: -5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                                <div style="font-size: 6px; color: #3498db;">PRO</div>
+                                <div style="font-size: 8px; font-weight: bold; color: #3498db;">$10</div>
+                            </div>
+                            <div style="width: 30px; height: 50px; border: 1px solid #ddd; border-radius: 3px; display: flex; flex-direction: column; align-items: center; padding-top: 5px;">
+                                <div style="font-size: 6px;">TEAM</div>
+                                <div style="font-size: 8px; font-weight: bold;">$50</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "3가지 요금제를 비교하는 <strong>Pricing 섹션</strong> 만들어줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Team</span></div>
+                    <div class="term-desc">구성원/의료진 소개</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div style="width: 25px; height: 25px; background: #ddd; border-radius: 50%; overflow: hidden;">
+                                    <div style="width: 100%; height: 100%; background: #bdc3c7;"></div>
+                                </div>
+                                <div style="width: 20px; height: 3px; background: #eee; margin-top: 3px;"></div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div style="width: 25px; height: 25px; background: #ddd; border-radius: 50%; overflow: hidden;">
+                                    <div style="width: 100%; height: 100%; background: #bdc3c7;"></div>
+                                </div>
+                                <div style="width: 20px; height: 3px; background: #eee; margin-top: 3px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "원장님과 의료진을 소개하는 <strong>Team 섹션</strong> 추가해줘"
+                    </div>
+                </div>
+
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Contact</span></div>
+                    <div class="term-desc">문의 양식(Form) 및 지도</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; gap: 5px; padding: 10px; box-sizing: border-box;">
+                            <div style="flex: 1; background: #ecf0f1; display: flex; flex-direction: column; gap: 3px; padding: 5px;">
+                                <div style="height: 5px; background: white; border: 1px solid #ddd;"></div>
+                                <div style="height: 5px; background: white; border: 1px solid #ddd;"></div>
+                                <div style="height: 10px; background: #3498db; border-radius: 2px;"></div>
+                            </div>
+                            <div style="flex: 1; background: #bdc3c7; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white;">MAP</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "왼쪽엔 문의 폼, 오른쪽엔 지도가 있는 <strong>Contact 섹션</strong>"
+                    </div>
+                </div>
+                
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Gallery / Portfolio</span></div>
+                    <div class="term-desc">이미지 그리드 모음</div>
+                    <div class="visual-demo">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; width: 80%;">
+                            <div style="aspect-ratio: 1; background: #bdc3c7;"></div>
+                            <div style="aspect-ratio: 1; background: #95a5a6;"></div>
+                            <div style="aspect-ratio: 1; background: #7f8c8d;"></div>
+                            <div style="aspect-ratio: 1; background: #95a5a6;"></div>
+                            <div style="aspect-ratio: 1; background: #7f8c8d;"></div>
+                            <div style="aspect-ratio: 1; background: #bdc3c7;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "시공 사례 사진을 보여줄 <strong>Gallery 섹션</strong> 만들어줘"
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 11. 트렌디한 디자인 스타일 -->
+        <div class="category-section">
+            <h2 class="category-title"><span style="color: #e91e63;">✨</span> 트렌디한 디자인 스타일 (Trends)</h2>
+            <p style="margin-bottom: 20px; color: #666;">"요즘 유행하는 그거..." 대신 정확한 스타일 명칭을 사용해보세요.</p>
+
+            <div class="term-grid">
+                <!-- Glassmorphism -->
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Glassmorphism</span></div>
+                    <div class="term-desc">글래스모피즘 (유리 질감)</div>
+                    <div class="visual-demo" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: 10px; left: 10px; width: 30px; height: 30px; background: rgba(255,255,255,0.3); border-radius: 50%;"></div>
+                        <div style="position: absolute; bottom: 10px; right: 10px; width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%;"></div>
+                        <div style="width: 80%; height: 50px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(4px); border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.18); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; text-shadow: 0 1px 2px rgba(0,0,0,0.1); z-index: 10;">
+                            Glass Effect
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "카드 배경에 흐릿한 유리 느낌의 <strong>글래스모피즘</strong> 효과를 줘"
+                    </div>
+                </div>
+
+                <!-- Neumorphism -->
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Neumorphism</span></div>
+                    <div class="term-desc">뉴모피즘 (부드러운 입체감)</div>
+                    <div class="visual-demo" style="background: #e0e5ec;">
+                        <div style="width: 60px; height: 60px; background: #e0e5ec; border-radius: 15px; box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5); display: flex; align-items: center; justify-content: center; color: #a3b1c6;">
+                            Button
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "버튼을 배경에서 튀어나온 듯한 <strong>뉴모피즘</strong> 스타일로 만들어줘"
+                    </div>
+                </div>
+
+                <!-- Claymorphism -->
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Claymorphism</span></div>
+                    <div class="term-desc">클레이모피즘 (3D 찰흙 느낌)</div>
+                    <div class="visual-demo" style="background: #f0f4f8;">
+                        <div style="width: 80px; height: 50px; background: #fff; border-radius: 16px; box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff, inset 4px 4px 8px rgba(0,0,0,0.05), inset -4px -4px 8px rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center; color: #6c757d; font-weight: bold;">
+                           Clay
+                        </div>
+                        <!-- Note: True claymorphism often uses multiple shadows and inner shadows. This is a simplified CSS representation. -->
+                        <style>
+                            .clay-demo {
+                                background-color: #6a5acd;
+                                color: white;
+                                border-radius: 16px;
+                                padding: 10px 20px;
+                                box-shadow: 
+                                    6px 6px 12px #b8b9be, 
+                                    -6px -6px 12px #ffffff,
+                                    inset 4px 4px 8px rgba(255, 255, 255, 0.2),
+                                    inset -4px -4px 8px rgba(0, 0, 0, 0.1);
+                            }
+                        </style>
+                         <div style="position: absolute; width: 60px; height: 60px; background: #ff7675; border-radius: 20px; box-shadow: 8px 8px 16px rgba(163,177,198,0.4), inset -4px -4px 8px rgba(0,0,0,0.1), inset 4px 4px 8px rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; transform: rotate(-10deg);">
+                            3D
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "아이콘을 둥글고 푹신해 보이는 <strong>클레이모피즘</strong> 느낌으로 디자인해줘"
+                    </div>
+                </div>
+
+                <!-- Bento Grid -->
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Bento Grid</span></div>
+                    <div class="term-desc">벤토 그리드 (도시락통 레이아웃)</div>
+                    <div class="visual-demo">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 5px; width: 80%; height: 80%;">
+                            <div style="background: #ddd; border-radius: 4px; grid-row: span 2;"></div>
+                            <div style="background: #ccc; border-radius: 4px;"></div>
+                            <div style="background: #bbb; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "애플 웹사이트처럼 깔끔한 <strong>벤토 그리드</strong> 레이아웃으로 배치해줘"
+                    </div>
+                </div>
+
+                <!-- Gradient Text -->
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Gradient Text</span></div>
+                    <div class="term-desc">그라데이션 텍스트</div>
+                    <div class="visual-demo">
+                        <div style="font-size: 20px; font-weight: 900; background: linear-gradient(to right, #3498db, #e74c3c); -webkit-background-clip: text; color: transparent;">
+                            Awesome
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "제목 글자에 파란색에서 빨간색으로 변하는 <strong>그라데이션 텍스트</strong> 효과를 줘"
+                    </div>
+                </div>
+
+                <!-- Dark Mode -->
+                <div class="term-card">
+                    <div class="term-header"><span class="term-name">Dark Mode</span></div>
+                    <div class="term-desc">다크 모드 (어두운 테마)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-radius: 4px;">
+                            <div style="color: #ffffff; font-size: 12px;">Dark Theme</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "눈이 편안한 <strong>다크 모드</strong> 컬러 팔레트를 적용해줘"
+                    </div>
+                </div>
+
+                 <!-- Minimalism -->
+                 <div class="term-card">
+                    <div class="term-header"><span class="term-name">Minimalism</span></div>
+                    <div class="term-desc">미니멀리즘 (여백의 미)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; background: #fff; display: flex; align-items: center; justify-content: center;">
+                            <div style="width: 5px; height: 5px; background: #000; border-radius: 50%;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "장식을 최대한 배제하고 여백을 많이 둔 <strong>미니멀리즘</strong> 스타일로 해줘"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12. 분야별 특화 섹션 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span style="color: #34495e;">🏢</span> 분야별 특화 섹션 용어 (Domain Specific)</h2>
+            <p style="margin-bottom: 20px; color: #666;">특정 분야에서 자주 쓰이는 전문 용어들을 알면 AI가 문맥을 더 잘 파악합니다.</p>
+
+            <div class="term-grid">
+                <!-- 1. 기업/스타트업 -->
+                <div class="term-card" style="border-left: 4px solid #2c3e50;">
+                    <div class="term-header"><span class="term-name">Partners / Clients</span></div>
+                    <div class="term-desc">협력사/고객사 로고 그리드 (신뢰도 상승)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 10px; box-sizing: border-box; align-content: center;">
+                            <div style="background: #bdc3c7; height: 15px; border-radius: 2px;"></div>
+                            <div style="background: #bdc3c7; height: 15px; border-radius: 2px;"></div>
+                            <div style="background: #bdc3c7; height: 15px; border-radius: 2px;"></div>
+                            <div style="background: #bdc3c7; height: 15px; border-radius: 2px;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "하단에 신뢰도를 줄 수 있는 <strong>Partners 로고 섹션</strong>을 흑백으로 깔끔하게 넣어줘"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-left: 4px solid #2c3e50;">
+                    <div class="term-header"><span class="term-name">Timeline / History</span></div>
+                    <div class="term-desc">회사 연혁 (시간 순서대로 나열)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; padding-left: 20px; position: relative;">
+                            <div style="position: absolute; left: 10px; top: 10px; bottom: 10px; width: 2px; background: #ddd;"></div>
+                            <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                                <div style="width: 6px; height: 6px; background: #3498db; border-radius: 50%; margin-left: -12px; margin-right: 10px;"></div>
+                                <div style="font-size: 8px;">2023 설립</div>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                                <div style="width: 6px; height: 6px; background: #3498db; border-radius: 50%; margin-left: -12px; margin-right: 10px;"></div>
+                                <div style="font-size: 8px;">2024 투자 유치</div>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 6px; height: 6px; background: #3498db; border-radius: 50%; margin-left: -12px; margin-right: 10px;"></div>
+                                <div style="font-size: 8px;">2025 글로벌 진출</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "회사 소개 페이지에 연혁을 보여줄 <strong>Timeline 섹션</strong>을 세로형으로 만들어줘"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-left: 4px solid #2c3e50;">
+                    <div class="term-header"><span class="term-name">Stats / Counter</span></div>
+                    <div class="term-desc">숫자 통계 카운팅 (실적 강조)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; justify-content: space-around; align-items: center;">
+                            <div style="text-align: center;">
+                                <div style="font-weight: bold; font-size: 12px; color: #3498db;">100+</div>
+                                <div style="font-size: 6px; color: #7f8c8d;">Clients</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-weight: bold; font-size: 12px; color: #e74c3c;">50K</div>
+                                <div style="font-size: 6px; color: #7f8c8d;">Downloads</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "누적 고객 수와 다운로드 수를 강조하는 <strong>Stats(Counter) 섹션</strong> 추가해줘"
+                    </div>
+                </div>
+
+                <!-- 2. 쇼핑몰 -->
+                <div class="term-card" style="border-left: 4px solid #e67e22;">
+                    <div class="term-header"><span class="term-name">Filter / Sort</span></div>
+                    <div class="term-desc">상품 필터링 및 정렬 기능</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; padding: 10px;">
+                            <div style="display: flex; gap: 5px; margin-bottom: 5px;">
+                                <div style="padding: 2px 5px; border: 1px solid #ddd; border-radius: 10px; font-size: 6px;">가격순 ▼</div>
+                                <div style="padding: 2px 5px; border: 1px solid #ddd; border-radius: 10px; font-size: 6px;">인기순</div>
+                            </div>
+                            <div style="display: flex; gap: 5px;">
+                                <div style="padding: 2px 5px; background: #f0f0f0; border-radius: 10px; font-size: 6px;">색상: Blue</div>
+                                <div style="padding: 2px 5px; background: #f0f0f0; border-radius: 10px; font-size: 6px;">Size: L</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "상품 목록 위에 가격순, 인기순으로 볼 수 있는 <strong>Filter & Sort</strong> 기능 넣어줘"
+                    </div>
+                </div>
+
+                <!-- 3. 블로그/매거진 -->
+                <div class="term-card" style="border-left: 4px solid #27ae60;">
+                    <div class="term-header"><span class="term-name">Masonry Grid</span></div>
+                    <div class="term-desc">벽돌 쌓기 레이아웃 (핀터레스트 스타일)</div>
+                    <div class="visual-demo">
+                        <div style="width: 80%; margin: 0 auto; column-count: 3; column-gap: 5px;">
+                            <div style="background: #bdc3c7; margin-bottom: 5px; break-inside: avoid; height: 30px;"></div>
+                            <div style="background: #bdc3c7; margin-bottom: 5px; break-inside: avoid; height: 50px;"></div>
+                            <div style="background: #bdc3c7; margin-bottom: 5px; break-inside: avoid; height: 20px;"></div>
+                            <div style="background: #bdc3c7; margin-bottom: 5px; break-inside: avoid; height: 40px;"></div>
+                            <div style="background: #bdc3c7; margin-bottom: 5px; break-inside: avoid; height: 25px;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "갤러리를 핀터레스트처럼 높이가 제각각인 <strong>Masonry Grid</strong>로 배치해줘"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-left: 4px solid #27ae60;">
+                    <div class="term-header"><span class="term-name">Infinite Scroll</span></div>
+                    <div class="term-desc">무한 스크롤 (스크롤하면 계속 로딩)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+                            <div style="display: flex; flex-direction: column; gap: 5px; opacity: 0.5;">
+                                <div style="height: 10px; background: #ddd;"></div>
+                                <div style="height: 10px; background: #ddd;"></div>
+                                <div style="height: 10px; background: #ddd;"></div>
+                            </div>
+                            <div style="position: absolute; bottom: 10px; width: 100%; text-align: center; font-size: 8px;">
+                                <span style="display: inline-block; animation: spin 1s infinite;">↻</span> Loading...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "페이지 번호 대신 스크롤하면 계속 나오는 <strong>Infinite Scroll</strong>로 구현해줘"
+                    </div>
+                </div>
+
+                <!-- 4. 랜딩페이지 -->
+                <div class="term-card" style="border-left: 4px solid #c0392b;">
+                    <div class="term-header"><span class="term-name">Countdown</span></div>
+                    <div class="term-desc">카운트다운 타이머 (마감 임박)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 5px;">
+                            <div style="background: #333; color: white; padding: 3px; border-radius: 2px; font-size: 10px;">02</div>
+                            <div>:</div>
+                            <div style="background: #333; color: white; padding: 3px; border-radius: 2px; font-size: 10px;">15</div>
+                            <div>:</div>
+                            <div style="background: #e74c3c; color: white; padding: 3px; border-radius: 2px; font-size: 10px;">48</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "이벤트 마감까지 남은 시간을 보여주는 <strong>Countdown</strong> 타이머를 넣어줘"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- 5. 교육/LMS (Learning) -->
+        <!-- 13. 추가 분야별 특화 섹션 용어 -->
+        <div class="category-section">
+            <h2 class="category-title"><span style="color: #8e44ad;">🎓</span> 추가 분야별 용어 (More Domains)</h2>
+            <p style="margin-bottom: 20px; color: #666;">교육, 요식업, 앱 서비스 등 더 다양한 분야의 용어들입니다.</p>
+
+            <div class="term-grid">
+                <div class="term-card" style="border-left: 4px solid #8e44ad;">
+                    <div class="term-header"><span class="term-name">Curriculum</span></div>
+                    <div class="term-desc">강의 목차/커리큘럼 (주로 아코디언 형태)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; padding: 10px; box-sizing: border-box;">
+                            <div style="background: #f3e5f5; padding: 5px; margin-bottom: 2px; font-size: 8px;">Section 1. Intro ▾</div>
+                            <div style="background: #fff; border: 1px solid #f3e5f5; padding: 5px; margin-bottom: 5px; font-size: 8px;">1-1. OT</div>
+                            <div style="background: #f3e5f5; padding: 5px; font-size: 8px;">Section 2. Basic ▸</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "강의 목차를 클릭하면 펼쳐지는 <strong>Curriculum</strong> 섹션으로 만들어줘"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-left: 4px solid #8e44ad;">
+                    <div class="term-header"><span class="term-name">Progress Bar</span></div>
+                    <div class="term-desc">진도율/진행 상황 표시바</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 10px; box-sizing: border-box;">
+                            <div style="font-size: 8px; margin-bottom: 3px;">진도율 75%</div>
+                            <div style="width: 100%; height: 8px; background: #eee; border-radius: 4px;">
+                                <div style="width: 75%; height: 100%; background: #8e44ad; border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "상단에 학습 진행 상황을 보여주는 <strong>Progress Bar</strong>를 고정해줘"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-left: 4px solid #8e44ad;">
+                    <div class="term-header"><span class="term-name">Instructor Profile</span></div>
+                    <div class="term-desc">강사 프로필 카드 (사진 + 이력)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; gap: 10px; padding: 10px; box-sizing: border-box;">
+                            <div style="width: 40px; height: 40px; background: #d1c4e9; border-radius: 50%;"></div>
+                            <div style="flex: 1;">
+                                <div style="width: 60%; height: 6px; background: #8e44ad; margin-bottom: 4px;"></div>
+                                <div style="width: 80%; height: 4px; background: #eee;"></div>
+                                <div style="width: 80%; height: 4px; background: #eee; margin-top: 2px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "강사님의 사진과 이력을 보여주는 신뢰감 있는 <strong>Instructor Profile</strong> 섹션"
+                    </div>
+                </div>
+
+                <!-- 6. 요식업/F&B (Food) -->
+                <div class="term-card" style="border-left: 4px solid #d35400;">
+                    <div class="term-header"><span class="term-name">Menu Grid</span></div>
+                    <div class="term-desc">메뉴판 (사진 + 이름 + 가격)</div>
+                    <div class="visual-demo">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; width: 100%; padding: 5px; box-sizing: border-box;">
+                            <div style="background: #fff; border: 1px solid #eee; padding: 5px; text-align: center;">
+                                <div style="width: 20px; height: 20px; background: #fce8e6; border-radius: 50%; margin: 0 auto 3px;"></div>
+                                <div style="font-size: 6px;">Pasta</div>
+                            </div>
+                            <div style="background: #fff; border: 1px solid #eee; padding: 5px; text-align: center;">
+                                <div style="width: 20px; height: 20px; background: #fce8e6; border-radius: 50%; margin: 0 auto 3px;"></div>
+                                <div style="font-size: 6px;">Pizza</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "음식 사진과 가격이 잘 보이는 <strong>Menu Grid</strong> 섹션을 만들어줘"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-left: 4px solid #d35400;">
+                    <div class="term-header"><span class="term-name">Reservation Form</span></div>
+                    <div class="term-desc">예약 폼 (날짜/인원 선택)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; gap: 3px;">
+                            <div style="display: flex; gap: 3px;">
+                                <div style="flex: 1; height: 10px; border: 1px solid #ddd; font-size: 6px; display: flex; align-items: center; padding-left: 2px;">Date</div>
+                                <div style="flex: 1; height: 10px; border: 1px solid #ddd; font-size: 6px; display: flex; align-items: center; padding-left: 2px;">Time</div>
+                            </div>
+                            <div style="height: 12px; background: #d35400; color: white; font-size: 8px; display: flex; align-items: center; justify-content: center;">Book Table</div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "날짜, 시간, 인원수를 선택할 수 있는 <strong>Reservation Form</strong>을 넣어줘"
+                    </div>
+                </div>
+
+                <!-- 7. 앱/SaaS (Software) -->
+                <div class="term-card" style="border-left: 4px solid #2980b9;">
+                    <div class="term-header"><span class="term-name">Dashboard</span></div>
+                    <div class="term-desc">데이터 대시보드 (통계/그래프)</div>
+                    <div class="visual-demo">
+                        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 3px; width: 100%; padding: 5px; box-sizing: border-box;">
+                            <div style="height: 30px; background: #ecf0f1; border-radius: 2px;"></div>
+                            <div style="height: 30px; background: #ecf0f1; border-radius: 2px;"></div>
+                            <div style="grid-column: span 2; height: 20px; background: #bdc3c7; border-radius: 2px;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "사용자 데이터를 한눈에 볼 수 있는 <strong>Dashboard</strong> 화면을 디자인해줘"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-left: 4px solid #2980b9;">
+                    <div class="term-header"><span class="term-name">Onboarding</span></div>
+                    <div class="term-desc">온보딩 (초기 가이드/튜토리얼)</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                            <div style="width: 30px; height: 40px; border: 1px solid #333; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 8px;">Step 1</div>
+                            <div style="display: flex; gap: 2px; margin-top: 3px;">
+                                <div style="width: 4px; height: 4px; background: #2980b9; border-radius: 50%;"></div>
+                                <div style="width: 4px; height: 4px; background: #ddd; border-radius: 50%;"></div>
+                                <div style="width: 4px; height: 4px; background: #ddd; border-radius: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "앱을 처음 켰을 때 주요 기능을 설명하는 <strong>Onboarding</strong> 슬라이드"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-left: 4px solid #2980b9;">
+                    <div class="term-header"><span class="term-name">Feature Toggle</span></div>
+                    <div class="term-desc">기능 ON/OFF 스위치</div>
+                    <div class="visual-demo">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <div style="width: 30px; height: 14px; background: #ddd; border-radius: 7px; position: relative;">
+                                <div style="width: 12px; height: 12px; background: white; border-radius: 50%; position: absolute; top: 1px; left: 1px;"></div>
+                            </div>
+                            <div style="width: 30px; height: 14px; background: #2ecc71; border-radius: 7px; position: relative;">
+                                <div style="width: 12px; height: 12px; background: white; border-radius: 50%; position: absolute; top: 1px; right: 1px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "알림 설정을 켜고 끌 수 있는 <strong>Feature Toggle</strong> 리스트 만들어줘"
+                    </div>
+                </div>
+
+                <!-- 8. 포트폴리오 (Portfolio) -->
+                <div class="term-card" style="border-left: 4px solid #34495e;">
+                    <div class="term-header"><span class="term-name">Case Study</span></div>
+                    <div class="term-desc">프로젝트 상세 분석 (문제→해결→결과)</div>
+                    <div class="visual-demo">
+                        <div style="padding: 5px;">
+                            <div style="font-size: 6px; font-weight: bold;">Project A</div>
+                            <div style="font-size: 5px; color: #666; margin-bottom: 2px;">Problem...</div>
+                            <div style="font-size: 5px; color: #666; margin-bottom: 2px;">Solution...</div>
+                            <div style="height: 20px; background: #eee; width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "프로젝트의 문제점과 해결 과정을 보여주는 <strong>Case Study</strong> 페이지"
+                    </div>
+                </div>
+
+                <div class="term-card" style="border-left: 4px solid #34495e;">
+                    <div class="term-header"><span class="term-name">Skill Bar</span></div>
+                    <div class="term-desc">보유 기술 능력치 그래프</div>
+                    <div class="visual-demo">
+                        <div style="padding: 10px;">
+                            <div style="font-size: 6px; margin-bottom: 2px; display: flex; justify-content: space-between;">
+                                <span>HTML/CSS</span> <span>90%</span>
+                            </div>
+                            <div style="height: 4px; background: #eee; border-radius: 2px; margin-bottom: 5px;">
+                                <div style="width: 90%; height: 100%; background: #34495e; border-radius: 2px;"></div>
+                            </div>
+                            <div style="font-size: 6px; margin-bottom: 2px; display: flex; justify-content: space-between;">
+                                <span>JS</span> <span>75%</span>
+                            </div>
+                            <div style="height: 4px; background: #eee; border-radius: 2px;">
+                                <div style="width: 75%; height: 100%; background: #34495e; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-box">
+                        <span class="prompt-label">🗣️ 요청 예시</span>
+                        "내가 다룰 수 있는 툴을 보여주는 <strong>Skill Bar</strong> 섹션을 넣어줘"
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
